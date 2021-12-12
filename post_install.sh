@@ -57,7 +57,7 @@ cp install_omz.sh /home/"$USER"/
 cp .zshrc /home/"$USER"/.zshrc.omz
 
 # Install yay and pamac-aur
-pacman -S --needed git base-devel && cd /home/"$USER" && git clone https://aur.archlinux.org/yay.git && cd yay && echo "Enter user password..." && su "$USER" -c "makepkg -si"
+pacman -S --needed git base-devel && cd /home/"$USER" && su "$USER" -c "git clone https://aur.archlinux.org/yay.git" && cd yay && echo "Enter user password..." && su "$USER" -c "makepkg -si"
 cd ..
 rm -rf yay
 yay -Syu pamac-aur
