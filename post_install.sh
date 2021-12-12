@@ -79,10 +79,10 @@ systemctl enable avahi-daemon.service
 systemctl enable bluetooth.service
 
 # fix some file permissions
-chown root /etc/mkinitcipio.conf
-chmod u=rw /etc/mkinitcipio.conf
-chmod g=r /etc/mkinitcipio.conf
-chmod o=r /etc/mkinitcipio.conf
+chown root /etc/mkinitcpio.conf
+chmod u=rw /etc/mkinitcpio.conf
+chmod g=r /etc/mkinitcpio.conf
+chmod o=r /etc/mkinitcpio.conf
 chown root /etc/locale.conf
 chmod u=rw /etc/locale.conf
 chmod g=r /etc/locale.conf
