@@ -33,6 +33,8 @@ echo "Finished partitioning."
 
 # Install system and packages
 echo "Installing system and packages listed in packages.txt..."
+cp pacman.conf /etc/pacman.conf
+pacman -Syy
 pacstrap /mnt base linux linux-firmware $(cat packages.txt)
 echo "Finished installation."
 
