@@ -38,12 +38,13 @@ echo "Finished installation."
 
 # Configure System
 echo "Configuring system..."
-cp mkinitcipio.conf /mnt/etc/mkinitcipio.conf
+cp mkinitcpio.conf /mnt/etc/mkinitcpio.conf
 genfstab -U /mnt >> /mnt/etc/fstab
 "Finished configuration."
 
 # chroot and run post-install
 "Post-installation..."
+cp pacman.conf /mnt/etc/pacman.conf
 cp sudoers /mnt/etc/sudoers
 cp locale.conf /mnt/etc/locale.conf
 cp locale.gen /mnt/etc/locale.gen
