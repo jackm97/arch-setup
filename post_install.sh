@@ -1,4 +1,6 @@
 #!/bin/bash
+set -x
+
 # variables to change for specific installation
 export HOSTNAME=arch-desktop
 export USER=user
@@ -24,6 +26,10 @@ chown root /etc/pacman.conf
 chmod u=r /etc/pacman.conf
 chmod g=r /etc/pacman.conf
 chmod o=r /etc/pacman.conf
+chown root /etc/default/grub
+chmod u=r /etc/default/grub
+chmod g=r /etc/default/grub
+chmod o=r /etc/default/grub
 
 # Timezone
 ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
@@ -54,19 +60,19 @@ pacman -Syu bluez bluez-utils
 
 # Install snapper
 echo "Setting up snapper..."
-pacman -Syu snapper snap-pac
+pacman -S --noconfirm snapper snap-pac
 snapper -c root create-config /
 echo "Finished snapper setup."
 
 # Install grub
 echo "Installing GRUB..."
-pacman -Syyu grub efibootmgr
+pacman -S --noconfirm grub efibootmgr
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ARCH
 grub-mkconfig -o /boot/grub/grub.cfg
 echo "Finished GRUB install"
 
 # Installing sudo and su
-pacman -S sudo
+pacman -S --noconfirm sudo util-linux
 
 # Setup user with oh-my-zsh
 echo "Setting up user with zsh..."
@@ -86,15 +92,16 @@ sudo -u "$USER" git clone https://aur.archlinux.org/yay.git
 cd yay
 sudo -u "$USER" /usr/bin/bash makepkg -si
 cd ..
+yay -Syy
+yay -S pamac-aur
 rm -rf yay
-yay -Syu pamac-aur
 cd /
 
 # Setup plymouth
 echo "Setting up plymouth..."
-sudo -u "$USER" yay -Syu plymouth-git plymouth-theme-arch-agua
+sudo -u "$USER" yay -S plymouth-git plymouth-theme-arch-agua
 plymouth-set-default-theme -R arch-agua
-echo "Finished plymouth setup. To enable add quiet splash vt.global_cursor_default=0 to kernel parameters"
+echo "Finished plymouth setup."
 
 
 # Enable services assumed from default package install list

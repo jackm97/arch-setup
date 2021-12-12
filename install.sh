@@ -47,6 +47,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 # chroot and run post-install
 "Post-installation..."
 cp pacman.conf /mnt/etc/pacman.conf
+cp grub /mnt/default/grub
 cp sudoers /mnt/etc/sudoers
 cp locale.conf /mnt/etc/locale.conf
 cp locale.gen /mnt/etc/locale.gen
