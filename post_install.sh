@@ -91,6 +91,10 @@ chmod u=r /etc/sudoers
 chmod g=r /etc/sudoers
 chmod o= /etc/sudoers
 
+cd /
+rm .zshrc
+rm post_install.sh
+
 
 
 
