@@ -54,7 +54,7 @@ pacman -Syu bluez bluez-utils
 
 # Install snapper
 echo "Setting up snapper..."
-pacman -Syu snappper snap-pac
+pacman -Syu snapper snap-pac
 snapper -c root create-config /
 echo "Finished snapper setup."
 
@@ -66,7 +66,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo "Finished GRUB install"
 
 # Installing sudo and su
-pacman -S sudo su
+pacman -S sudo
 
 # Setup user with oh-my-zsh
 echo "Setting up user with zsh..."
@@ -79,7 +79,12 @@ cp omz_install.sh /home/"$USER"/
 cp .zshrc /home/"$USER"/.zshrc.omz
 
 # Install yay and pamac-aur
-pacman -S --needed git base-devel && cd /home/"$USER" && echo "Enter user password..."  && su "$USER" -c "git clone https://aur.archlinux.org/yay.git" && cd yay && sudo -u "$USER" /usr/bin/bash makepkg -si
+pacman -S --needed git base-devel
+cd /home/"$USER"
+echo "Enter user password..."
+su "$USER" -c "git clone https://aur.archlinux.org/yay.git"
+cd yay
+sudo -u "$USER" /usr/bin/bash makepkg -si
 cd ..
 rm -rf yay
 yay -Syu pamac-aur
