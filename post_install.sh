@@ -51,12 +51,12 @@ passwd
 
 # Setup CUPS
 echo "Setting up CUPS..."
-pacman -Syu cups{,-pdf} avahi
+pacman -S --noconfirm cups{,-pdf} avahi
 echo "Finished CUPS setup."
 
 # Setup Bluetooth
 echo "Setting up bluetooth"
-pacman -Syu bluez bluez-utils 
+pacman -S --noconfirm bluez bluez-utils 
 
 # Install snapper
 echo "Setting up snapper..."
@@ -76,24 +76,24 @@ pacman -S --noconfirm sudo util-linux
 
 # Setup user with oh-my-zsh
 echo "Setting up user with zsh..."
-pacman -S zsh xdg-user-dirs
+pacman -S --noconfirm zsh xdg-user-dirs
 useradd -m -G wheel -s /usr/bin/zsh "$USER"
 echo "Set user password..."
 passwd "$USER"
-pacman -S grml-zsh-config
-cp omz_install.sh /home/"$USER"/
-cp .zshrc /home/"$USER"/.zshrc.omz
+pacman -S --noconfirm grml-zsh-config
+mv omz_install.sh /home/"$USER"/
+chown "$USER" /home/"$USER"/omz_install.sh
 
 # Install yay and pamac-aur
-pacman -S --needed git base-devel
+pacman -S --noconfirm --needed git base-devel
 cd /home/"$USER"
 echo "Enter user password..."
 sudo -u "$USER" git clone https://aur.archlinux.org/yay.git
 cd yay
 sudo -u "$USER" /usr/bin/bash makepkg -si
 cd ..
-yay -Syy
-yay -S pamac-aur
+sudo -u "$USER" yay -Syy
+sudo -u "$USER" yay -S pamac-aur
 rm -rf yay
 cd /
 

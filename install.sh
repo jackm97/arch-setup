@@ -47,12 +47,11 @@ genfstab -U /mnt >> /mnt/etc/fstab
 # chroot and run post-install
 "Post-installation..."
 cp pacman.conf /mnt/etc/pacman.conf
-cp grub /mnt/default/grub
+cp grub /mnt/etc/default/grub
 cp sudoers /mnt/etc/sudoers
 cp locale.conf /mnt/etc/locale.conf
 cp locale.gen /mnt/etc/locale.gen
 cp post_install.sh /mnt
-cp .zshrc /mnt
 cp omz_install.sh /mnt
 arch-chroot /mnt sh post_install.sh
 echo "Installation complete. Reboot the system."
