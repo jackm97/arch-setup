@@ -46,8 +46,9 @@ genfstab -U /mnt >> /mnt/etc/fstab
 "Post-installation..."
 cp sudoers /mnt/etc/sudoers
 cp locale.conf /mnt/etc/locale.conf
+cp locale.gen /mnt/etc/locale.gen
 cp post_install.sh /mnt
 cp .zshrc /mnt
 arch-chroot /mnt sh post_install.sh
-"Installation complete. Reboot the system."
+echo "Installation complete. Reboot the system."
 

@@ -4,7 +4,7 @@ export HOSTNAME=arch-desktop
 export USER=user
 
 # Timezone
-ln -sf /usr/share/zoneinfo/America/Los_Angeles
+ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
 hwclock --systohc
 
 # Localization
@@ -30,16 +30,6 @@ echo "Finished CUPS setup."
 echo "Setting up bluetooth"
 pacman -Syu bluez bluez-utils 
 
-# Install yay and pamac-aur
-pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
-yay -Syu pamac-aur
-
-# Setup plymouth
-echo "Setting up plymouth..."
-yay -Syu plymouth-git plymouth-theme-arch-agua
-plymouth-set-default-theme -R arch-agua
-echo "Finished plymouth setup. To enable add quiet splash vt.global_cursor_default=0 to kernel parameters"
-
 # Install snapper
 echo "Setting up snapper..."
 pacman -Syu snappper snap-pac
@@ -50,23 +40,31 @@ echo "Finished snapper setup."
 echo "Installing GRUB..."
 pacman -Syyu grub efibootmgr
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=ARCH
+grub-mkconfig -o /boot/grub/grub.cfg
 echo "Finished GRUB install"
 
 # Installing sudo and su
 pacman -S sudo su
 
 # Setup user with oh-my-zsh
-echo "Setting up user with oh-my-zsh..."
+echo "Setting up user with z..."
 pacman -S zsh xdg-user-dirs
 useradd -m -G wheel -s /usr/bin/zsh "$USER"
 echo "Set user password..."
 passwd "$USER"
-pacman -S wget
-sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-( cd $ZSH_CUSTOM/plugins && git clone https://github.com/chrissicool/zsh-256color )
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-cp .zshrc /home/"$USER"
+pacman -S grml-zsh-config
+cp install_omz.sh /home/"$USER"/
+cp .zshrc /home/"$USER"/.zshrc.omz
+
+# Install yay and pamac-aur
+pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && echo "Enter user password..." && su "$USER" -c "makepkg -si"
+yay -Syu pamac-aur
+
+# Setup plymouth
+echo "Setting up plymouth..."
+yay -Syu plymouth-git plymouth-theme-arch-agua
+plymouth-set-default-theme -R arch-agua
+echo "Finished plymouth setup. To enable add quiet splash vt.global_cursor_default=0 to kernel parameters"
 
 
 # Enable services assumed from default package install list
@@ -86,6 +84,10 @@ chown root /etc/locale.conf
 chmod u=rw /etc/locale.conf
 chmod g=r /etc/locale.conf
 chmod o=r /etc/locale.conf
+chown root /etc/locale.gen
+chmod u=rw /etc/locale.gen
+chmod g=r /etc/locale.gen
+chmod o=r /etc/locale.gen
 chown root /etc/sudoers
 chmod u=r /etc/sudoers
 chmod g=r /etc/sudoers
