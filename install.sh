@@ -28,7 +28,7 @@ mount "$ROOTPART" /mnt/home -o subvol=@home
 mkdir -p /mnt/var/log
 mkdir -p /mnt/var/vm-images
 mount "$ROOTPART" /mnt/var/log -o subvol=@var_log
-mount "$ROOTPART" /mnt/var/vm-images -o subvol=@mv_images,nodatacow
+mount "$ROOTPART" /mnt/var/vm-images -o subvol=@vm_images,nodatacow
 echo "Finished partitioning."
 
 # Install system and packages
@@ -49,6 +49,7 @@ cp locale.conf /mnt/etc/locale.conf
 cp locale.gen /mnt/etc/locale.gen
 cp post_install.sh /mnt
 cp .zshrc /mnt
+cp omz_install.sh /mnt
 arch-chroot /mnt sh post_install.sh
 echo "Installation complete. Reboot the system."
 

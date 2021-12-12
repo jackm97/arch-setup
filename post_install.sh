@@ -57,8 +57,11 @@ cp install_omz.sh /home/"$USER"/
 cp .zshrc /home/"$USER"/.zshrc.omz
 
 # Install yay and pamac-aur
-pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && echo "Enter user password..." && su "$USER" -c "makepkg -si"
+pacman -S --needed git base-devel && cd /home/"$USER" && git clone https://aur.archlinux.org/yay.git && cd yay && echo "Enter user password..." && su "$USER" -c "makepkg -si"
+cd ..
+rm -rf yay
 yay -Syu pamac-aur
+cd /
 
 # Setup plymouth
 echo "Setting up plymouth..."
@@ -95,6 +98,7 @@ chmod o= /etc/sudoers
 
 cd /
 rm .zshrc
+tm omz_install.sh
 rm post_install.sh
 
 
