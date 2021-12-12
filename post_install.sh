@@ -23,7 +23,7 @@ chmod o= /etc/sudoers
 chown root /etc/pacman.conf
 chmod u=r /etc/pacman.conf
 chmod g=r /etc/pacman.conf
-chmod o= /etc/pacman.conf
+chmod o=r /etc/pacman.conf
 
 # Timezone
 ln -sf /usr/share/zoneinfo/America/Los_Angeles /etc/localtime
@@ -82,7 +82,7 @@ cp .zshrc /home/"$USER"/.zshrc.omz
 pacman -S --needed git base-devel
 cd /home/"$USER"
 echo "Enter user password..."
-su "$USER" -c "git clone https://aur.archlinux.org/yay.git"
+sudo -u "$USER" git clone https://aur.archlinux.org/yay.git
 cd yay
 sudo -u "$USER" /usr/bin/bash makepkg -si
 cd ..
