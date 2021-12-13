@@ -20,11 +20,11 @@ btrfs subvol create /mnt/@snapshots
 btrfs subvol create /mnt/@var_log
 btrfs subvol create /mnt/@vm_images 
 umount /mnt
-mount "$ROOTPART" /mnt -o subvol=@
+mount "$ROOTPART" /mnt -o subvol=@,compress=zstd
 mkdir /mnt/boot
 mount "$EFIPART" /mnt/boot
 mkdir /mnt/home
-mount "$ROOTPART" /mnt/home -o subvol=@home
+mount "$ROOTPART" /mnt/home -o subvol=@home,compress=zstd
 mkdir -p /mnt/var/log
 mkdir -p /mnt/var/vm-images
 mount "$ROOTPART" /mnt/var/log -o subvol=@var_log
