@@ -99,6 +99,7 @@ mv omz_install.sh /home/"$USER"/
 chown "$USER" /home/"$USER"/omz_install.sh
 echo "Enter user password..."
 sudo -u "$USER" /usr/bin/zsh /home/"$USER"/omz_install.sh
+sudo -u "$USER" /usr/bin/zsh /home/"$USER"/omz_install.sh
 
 # Setup plymouth
 echo "Setting up plymouth..."

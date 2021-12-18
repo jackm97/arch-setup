@@ -17,18 +17,17 @@ mount "$ROOTPART" /mnt
 btrfs subvol create /mnt/@ #root
 btrfs subvol create /mnt/@home 
 btrfs subvol create /mnt/@snapshots
-btrfs subvol create /mnt/@var_log
-btrfs subvol create /mnt/@vm_images 
+btrfs subvol create /mnt/@var
 umount /mnt
 mount "$ROOTPART" /mnt -o subvol=@,compress=zstd
 mkdir /mnt/boot
 mount "$EFIPART" /mnt/boot
 mkdir /mnt/home
 mount "$ROOTPART" /mnt/home -o subvol=@home,compress=zstd
-mkdir -p /mnt/var/log
-mkdir -p /mnt/var/vm-images
-mount "$ROOTPART" /mnt/var/log -o subvol=@var_log
-mount "$ROOTPART" /mnt/var/vm-images -o subvol=@vm_images,nodatacow
+mkdir -p /mnt/var/
+mount "$ROOTPART" /mnt/var/ -o subvol=@var,compress=zstd
+mkdir -p /mnt/.snapshots/
+mount "$ROOTPART" /mnt/.snapshots/ -o subvol=@snapshots,compress=zstd
 echo "Finished partitioning."
 
 # Install system and packages
