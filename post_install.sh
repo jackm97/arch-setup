@@ -85,7 +85,6 @@ mv omz_install.sh /home/"$USER"/
 chown "$USER" /home/"$USER"/omz_install.sh
 echo "Enter user password..."
 sudo -u "$USER" /usr/bin/zsh /home/"$USER"/omz_install.sh
-rm /home/"$USER"/omz_install.sh
 
 # Install yay and pamac-aur
 pacman -S --noconfirm --needed git base-devel
@@ -115,7 +114,6 @@ systemctl enable avahi-daemon.service
 systemctl enable bluetooth.service
 
 cd /
-rm omz_install.sh
 rm post_install.sh
 
 
