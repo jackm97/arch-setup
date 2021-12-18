@@ -9,4 +9,4 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/cu
 
 source ~/.zshrc && omz plugin enable git zsh-autosuggestions history zsh-256color z sudo zsh-syntax-highlighting
 source ~/.zshrc && omz theme set 'powerlevel10k/powerlevel10k'
-source ~/.zshrc
+exit
