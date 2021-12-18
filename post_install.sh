@@ -74,17 +74,13 @@ echo "Finished GRUB install"
 # Installing sudo and su
 pacman -S --noconfirm sudo util-linux
 
-# Setup user with oh-my-zsh
+# Setup user with zsh
 echo "Setting up user with zsh..."
 pacman -S --noconfirm zsh xdg-user-dirs
 useradd -m -G wheel -s /usr/bin/zsh "$USER"
 echo "Set user password..."
 passwd "$USER"
 pacman -S --noconfirm grml-zsh-config
-mv omz_install.sh /home/"$USER"/
-chown "$USER" /home/"$USER"/omz_install.sh
-echo "Enter user password..."
-sudo -u "$USER" /usr/bin/zsh /home/"$USER"/omz_install.sh
 
 # Install yay and pamac-aur
 pacman -S --noconfirm --needed git base-devel
@@ -97,6 +93,12 @@ sudo -u "$USER" yay -Syy
 sudo -u "$USER" yay -S pamac-aur
 rm -rf yay
 cd /
+
+# Setup Oh My ZSH
+mv omz_install.sh /home/"$USER"/
+chown "$USER" /home/"$USER"/omz_install.sh
+echo "Enter user password..."
+sudo -u "$USER" /usr/bin/zsh /home/"$USER"/omz_install.sh
 
 # Setup plymouth
 echo "Setting up plymouth..."
