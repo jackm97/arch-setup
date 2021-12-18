@@ -85,6 +85,7 @@ pacman -S --noconfirm grml-zsh-config
 # Install yay and pamac-aur
 pacman -S --noconfirm --needed git base-devel
 cd /home/"$USER"
+echo "Enter user password..."
 sudo -u "$USER" git clone https://aur.archlinux.org/yay.git
 cd yay
 sudo -u "$USER" /usr/bin/bash makepkg -si
@@ -97,9 +98,8 @@ cd /
 # Setup Oh My ZSH
 mv omz_install.sh /home/"$USER"/
 chown "$USER" /home/"$USER"/omz_install.sh
-echo "Enter user password..."
-sudo -u "$USER" /usr/bin/zsh /home/"$USER"/omz_install.sh
-sudo -u "$USER" /usr/bin/zsh /home/"$USER"/omz_install.sh
+chmod +x /home/"$USER"/omz_install.sh
+sudo -u "$USER" ./home/"$USER"/omz_install.sh
 
 # Setup plymouth
 echo "Setting up plymouth..."
