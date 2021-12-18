@@ -100,6 +100,7 @@ mv omz_install.sh /home/"$USER"/
 chown "$USER" /home/"$USER"/omz_install.sh
 chmod +x /home/"$USER"/omz_install.sh
 sudo -u "$USER" ./home/"$USER"/omz_install.sh
+rm /home/"$USER"/omz_install.sh
 
 # Setup plymouth
 echo "Setting up plymouth..."
