@@ -115,7 +115,6 @@ systemctl enable avahi-daemon.service
 systemctl enable bluetooth.service
 
 cd /
-rm .zshrc
 rm omz_install.sh
 rm post_install.sh
 

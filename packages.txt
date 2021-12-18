@@ -1,1 +1,1 @@
-gnome dconf-editor gnome-tweaks gnome-usage vim wget pipewire pipewire-pulse networkmanager reflector
+gnome xdg-user-dirs dconf-editor gnome-tweaks gnome-usage vim wget pipewire pipewire-pulse networkmanager reflector
