@@ -50,8 +50,10 @@ cp grub /mnt/etc/default/grub
 cp sudoers /mnt/etc/sudoers
 cp locale.conf /mnt/etc/locale.conf
 cp locale.gen /mnt/etc/locale.gen
+cp nsswitch.conf /mnt
 cp post_install.sh /mnt
 cp omz_install.sh /mnt
+cp omz_post_install.sh /mnt
 arch-chroot /mnt sh post_install.sh
 echo "Installation complete. Reboot the system."
 

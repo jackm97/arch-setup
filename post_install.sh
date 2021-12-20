@@ -51,7 +51,8 @@ passwd
 
 # Setup CUPS
 echo "Setting up CUPS..."
-pacman -S --noconfirm cups{,-pdf} avahi
+pacman -S --noconfirm cups{,-pdf} avahi nss-mdns sane-airscan
+mv nsswitch.conf /etc/nsswitch.conf
 echo "Finished CUPS setup."
 
 # Setup Bluetooth
@@ -97,6 +98,7 @@ cd /
 
 # Setup Oh My ZSH
 mv omz_install.sh /home/"$USER"/
+mv omz_post_install.sh /home/"$USER"/
 chown "$USER" /home/"$USER"/omz_install.sh
 chmod +x /home/"$USER"/omz_install.sh
 sudo -u "$USER" ./home/"$USER"/omz_install.sh
